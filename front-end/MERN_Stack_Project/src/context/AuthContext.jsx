@@ -54,7 +54,7 @@ export const AuthProvider = ({children}) => {
     }, [])
 
     const value = {
-        currentUser, registerUser, loginUser, signInWithGoogle, logout
+        currentUser, registerUser, loginUser, signInWithGoogle, logout, loading,
     }
 
     return (

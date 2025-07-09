@@ -21,6 +21,9 @@ app.use('/api/books', bookRoutes);
 const orderRoutes = require('./src/orders/order.route');
 app.use('/api/orders', orderRoutes);
 
+const userRoutes = require('./src/users/user.route');
+app.use('/api/auth', userRoutes);
+
 async function main() {
     await mongoose.connect(process.env.DB_URI);
     app.use('/', (req, res) => {
