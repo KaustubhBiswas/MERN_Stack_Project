@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import getBaseURL from '../utils/getBaseURL'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import getBaseURL from '../utils/getBaseURL';
 
 
 const baseQuery = fetchBaseQuery({
@@ -26,6 +26,10 @@ const booksApi = createApi({
         fetchBookById: builder.query({
             query: (id) => `/${id}`,
             providesTags: (result, error, id) => [{ type: "Books", id }],
+        }),
+        fetchSpecificBooks: builder.query({
+            query: (query) => `/search?q=${encodeURIComponent(query)}`,
+            providesTags: (result, error, query) => [{ type: "Books", id: query }],
         }),
         addBook: builder.mutation({
             query: (newBook) => ({
@@ -56,5 +60,5 @@ const booksApi = createApi({
     })
 })
 
-export const {useFetchAllBooksQuery, useFetchBookByIdQuery, useAddBookMutation, useUpdateBookMutation, useDeleteBookMutation} = booksApi;
+export const {useFetchAllBooksQuery, useFetchBookByIdQuery, useAddBookMutation, useUpdateBookMutation, useDeleteBookMutation, useLazyFetchSpecificBooksQuery} = booksApi;
 export default booksApi;
