@@ -1,4 +1,6 @@
+import Loading from '../components/Loading';
 import { useAuth } from '../context/AuthContext';
+import { useFetchAllBooksQuery } from '../redux/booksApi';
 import { useGetOrderByEmailQuery } from '../redux/ordersApi';
 
 const OrdersPage = () => {
@@ -7,9 +9,18 @@ const OrdersPage = () => {
 
     const { data: orders = [], isLoading, isError } = useGetOrderByEmailQuery(currentUser.email);
 
+    const { data: books = [], isLoading: booksLoading, isError: booksError } = useFetchAllBooksQuery();
 
-    if (isLoading) return <div>Loading...</div>
-    if (isError) return <div>Error loading orders</div>
+
+
+    if (isLoading || booksLoading) return <Loading />;
+    if (isError || booksError) return <div>Error loading orders</div>
+
+    const getBookTitle = (id) => {
+        const book = books.find(b => b._id === id);
+        return book ? book.title : `Unknown Book (${id})`;
+    };
+
 
     return (
         <div className='container mx-auto p-6'>
@@ -27,10 +38,10 @@ const OrdersPage = () => {
                                 <p className="text-gray-600">Total Price: ${order.totalPrice}</p>
                                 <h3 className="font-semibold mt-2">Address:</h3>
                                 <p> {order.address.city}, {order.address.state}, {order.address.country}, {order.address.zipcode}</p>
-                                <h3 className="font-semibold mt-2">Products Id:</h3>
+                                <h3 className="font-semibold mt-2">Books:</h3>
                                 <ul>
                                     {order.productIds.map((productId) => (
-                                        <li key={productId}>{productId}</li>
+                                        <li key={productId}>{getBookTitle(productId)}</li>
                                     ))}
                                 </ul>
                             </div>

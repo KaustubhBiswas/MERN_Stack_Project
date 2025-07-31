@@ -98,11 +98,11 @@ const Navbar = () => {
                     </Link>
 
                     {/* search input */}
-                    <div className="relative sm:w-72 w-40 space-x-2">   
+                    <div className="relative sm:w-72 w-40 space-x-2">
 
                         <CiSearch className="absolute inline-block left-3 inset-y-2" />
                         <div>
-                            <div ref={searchRef}></div>
+                            <div className='relative w-full sm:w-72' ref={searchRef}></div>
                             <input
                                 type="text"
                                 placeholder="Search here"
@@ -114,7 +114,9 @@ const Navbar = () => {
                             {/* Only show results if there is a query */}
                             {
                                 query.trim() !== "" && (
-                                    <div className="max-h-72 overflow-y-auto border border-gray-300 rounded-md shadow-sm">
+                                    <div
+                                        className="absolute z-50 left-0 mt-2 w-full bg-slate-500 shadow-lg rounded-md max-h-80 overflow-y-auto"
+                                    >
                                         {books.length > 0 ? (
                                             <ReactScrollableList
                                                 listItems={listItems}
@@ -135,8 +137,6 @@ const Navbar = () => {
                                 )
                             }
                         </div>
-
-
                     </div>
                 </div>
 

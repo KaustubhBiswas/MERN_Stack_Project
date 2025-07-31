@@ -9,11 +9,12 @@ const User = require('./user.model');
 const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
 router.post('/admin', async (req, res) => {
+    //console.log("REQ.BODY: ", req.body);
     const {userName, password} = req.body;
     try {
         const admin = await User.findOne({userName});
         if (!admin){
-            res.status(404).send({message: "Admin user not found."});
+            res.status(404).send({message: "Admin not found."});
         }
         if (admin.password !== password){
             res.status(401).send({message: "Invalid Password!"});

@@ -10,8 +10,6 @@ const AdminRoute = ({children}) => {
     }
 
     return children?  children : <Outlet />;
-
-
 }
 
 export default AdminRoute

@@ -3,6 +3,7 @@ import Banner from './Banner';
 import TopSellers from './TopSellers';
 import Recommended from './Recommended';
 import News from './News';
+import ChatBot from '../components/ChatBot';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <TopSellers/>
             <Recommended/>
             <News/>
+            <ChatBot />
         </>
     )
 }
