@@ -45,8 +45,8 @@ const Dashboard = () => {
                         </svg>
                     </div>
                     <div>
-                        <span className="block text-2xl font-bold">{data?.totalBooks}</span>
-                        <span className="block text-gray-500">Products</span>
+                        <span className="block text-2xl font-bold">{data.totalBooks}</span>
+                        <span className="block text-gray-500">Books</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">

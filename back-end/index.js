@@ -25,18 +25,23 @@ const userRoutes = require('./src/users/user.route');
 app.use('/api/auth', userRoutes);
 
 const adminRoutes = require('./src/stats/admin.stats');
-app.use('api/admin', adminRoutes);
+app.use('/api/admin', adminRoutes);
 
+// ✅ Add fallback route after all others
+app.get('/', (req, res) => {
+  res.send("Welcome to the bookstore server!");
+});
+
+// DB connection
 async function main() {
-    await mongoose.connect(process.env.DB_URI);
-    app.use('/', (req, res) => {
-        res.send("Welcome to the bookstore server!");
-    })
+  await mongoose.connect(process.env.DB_URI);
 }
 
-main().then(() => console.log("MongoDB connected successfully")).catch(err => console.log(err));
+main()
+  .then(() => console.log("✅ MongoDB connected successfully"))
+  .catch(err => console.error("❌ MongoDB connection failed", err));
 
-
+// Server start
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+  console.log(`🚀 Server is running on http://localhost:${port}`);
+});
